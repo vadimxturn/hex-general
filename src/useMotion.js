@@ -28,11 +28,13 @@ export function useMotion() {
         const delay = parseFloat(getComputedStyle(entry.target).getPropertyValue('--d')) || 0;
         window.setTimeout(() => entry.target.classList.add('is-settled'), delay + 700);
       });
-    }, { threshold: 0.16, rootMargin: '0px 0px -32px 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
 
     document.querySelectorAll('[data-reveal]').forEach((node) => {
       if (!node.classList.contains('is-in')) io.observe(node);
     });
+    // Added only after the observer exists, so a failed script never leaves content hidden.
+    root.classList.add('motion-ready');
 
     return () => {
       document.removeEventListener('animationend', onEnd);
