@@ -122,7 +122,6 @@ export default function QuoteModal({ open, onClose }) {
     try {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'lead_submit', projectType: data.projectType });
-      if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
     } catch { /* ignore */ }
     try {
       sessionStorage.setItem('hexLead', JSON.stringify({ firstName: data.firstName.trim(), name: `${data.firstName.trim()} ${data.lastName.trim()}`, projectType: data.projectType, timeline: data.timeline }));
