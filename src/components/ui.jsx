@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from './Icon.jsx';
+import { FALLBACKS } from '../content.js';
 
 export function Eyebrow({ children, dark = false }) {
   return <span className={`eyebrow${dark ? ' eyebrow--dark' : ''}`}>{children}</span>;
@@ -34,9 +35,20 @@ export function SectionHeader({ eyebrow, text, accent, end, intro, dark = false,
   );
 }
 
-// Image with graceful fallback (shows a soft gradient if the file is missing).
-export function Photo({ src, alt = '', className = '', style }) {
-  const [failed, setFailed] = React.useState(false);
-  if (!src || failed) return <div className={`photo photo--fallback ${className}`} style={style} role="img" aria-label={alt} />;
-  return <img className={`photo ${className}`} src={src} alt={alt} loading="lazy" style={style} onError={() => setFailed(true)} />;
+// Image with graceful fallback: local file -> hexrenewal.com photo -> soft gradient.
+export function Photo({ src, alt = '', className = '', style, eager = false }) {
+  const [stage, setStage] = React.useState(0);
+  const sources = [src, FALLBACKS[src]].filter(Boolean);
+  const current = sources[stage];
+  if (!current) return <div className={`photo photo--fallback ${className}`} style={style} role="img" aria-label={alt} />;
+  return (
+    <img
+      className={`photo ${className}`}
+      src={current}
+      alt={alt}
+      loading={eager ? 'eager' : 'lazy'}
+      style={style}
+      onError={() => setStage((s) => s + 1)}
+    />
+  );
 }

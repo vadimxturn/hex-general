@@ -8,6 +8,29 @@ export const TERMS_URL = 'https://www.hexrenewal.com/terms-of-service';
 
 const img = (name) => `/images/${name}`;
 
+// Public photos already on hexrenewal.com. Used automatically when the matching
+// local file in /public/images is missing (see Photo in components/ui.jsx).
+const SQ = 'https://images.squarespace-cdn.com/content/v1/662140f0ef4578539dff3e73/';
+const sq = (path) => `${SQ}${path}?format=1500w`;
+export const FALLBACKS = {
+  [img('logo.png')]: `${SQ}23ffb430-42b7-475c-bcd0-e2d148b5f5b3/Hex-Affordable-General-Contractors-Sacramento-CA.png?format=500w`,
+  [img('hero-bg.jpg')]: sq('0818d1a2-1bb0-4a17-b53d-73f9d1d11ac0/white-marble-shower-bathroom-remodel-hex-sacramento.jpg'),
+  [img('final-cta-bg.jpg')]: sq('8694b58b-a0b9-40c5-87cc-0a585e6c91db/hex-bathroom-remodel-black-roseville-ca.jpg'),
+  [img('service-tub-to-shower.jpg')]: sq('0f9cf7bc-b519-4581-a857-0671f4b3028c/custom-bathroom-hex-general-contractor-sacramento-ca.jpg'),
+  [img('service-walk-in.jpg')]: sq('972e4f91-338b-4358-a423-c321f34e5170/hex-custom-bathroom-remodel-elk-grove-ca.jpg'),
+  [img('service-full.jpg')]: sq('a97b8a0d-07b0-4404-9312-a5ba14a3d5a1/hex-modern-bathroom-remodel-sacramento-ca.jpg'),
+  [img('service-vanity.jpg')]: sq('9291cdf7-73cb-45e1-948c-225e2b6fb935/bathroom-remodeler-hex-contractor-roseville-ca.jpg'),
+  [img('service-tile.jpg')]: sq('f75f64c4-e656-46b5-b61f-a9d64c1d906f/bathroom-remodeler-hex-contractor-folsom-ca.jpg'),
+  [img('why-hex.jpg')]: sq('ab066f9e-150d-4f04-a563-4fff1b059a3b/bathroom-remodel-hex-contractor-fair-oaks-ca.jpg'),
+  [img('gallery-1.jpg')]: sq('4c22fdbe-35ab-4d8d-9c2f-3a1ba4139eaf/hex-general-contractor-bathroom-folsom-ca.jpg'),
+  [img('gallery-2.jpg')]: sq('3bb8a359-198f-4424-b6c8-62d53bbef95e/hex-bathroom-general-contractor-sacramento-ca.jpg'),
+  [img('gallery-3.jpg')]: sq('52818d24-1444-465e-ad8c-c0a78cc5e395/hex-bathroom-general-contractor-roseville-ca.jpg'),
+  [img('gallery-4.jpg')]: sq('88df1ff0-1e09-48b8-8a3a-d040e49246d1/hex-bathroom-general-contractor-elk-grove-ca.jpg'),
+  [img('gallery-5.jpg')]: sq('c5f82bdd-77f3-4827-8dd4-4f1845189ffd/hex-bathroom-general-contractor-davis-ca.jpg'),
+  [img('gallery-6.jpg')]: sq('a28e2ae8-f0c2-4ec9-b69b-d4931925c8bb/hex-bathroom-general-contractor-fair-oaks-ca.jpg'),
+};
+export const bg = (path) => (FALLBACKS[path] ? `url(${path}), url(${FALLBACKS[path]})` : `url(${path})`);
+
 export const IMAGES = {
   logo: img('logo.png'),
   heroBg: img('hero-bg.jpg'),

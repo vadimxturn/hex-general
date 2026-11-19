@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Icon, { Stars, GoogleG } from './Icon.jsx';
 import { CtaButton, Eyebrow, Photo, SectionHeader, Title } from './ui.jsx';
 import {
-  IMAGES, PHONE_DISPLAY, PHONE_TEL, LICENSE, PRIVACY_URL,
+  IMAGES, bg, PHONE_DISPLAY, PHONE_TEL, LICENSE, PRIVACY_URL,
   hero, trustStrip, problems, reviews, band, services, howItWorks, beforeAfter, whyHex, crew, faq, finalCta,
 } from '../content.js';
 
@@ -11,7 +11,7 @@ export function Header({ onQuote }) {
   return (
     <header className="site-header">
       <div className="container site-header__inner">
-        <img className="site-header__logo" src={IMAGES.logo} alt="HEX General Contractors" />
+        <Photo eager src={IMAGES.logo} alt="HEX General Contractors" className="site-header__logo" />
         <div className="site-header__actions">
           <a className="header-call" href={PHONE_TEL}>
             <span className="header-call__icon"><Icon name="phone" size={18} /></span>
@@ -30,7 +30,7 @@ export function Header({ onQuote }) {
 /* ---------- Hero ---------- */
 export function Hero({ onQuote }) {
   return (
-    <section className="hero" style={{ backgroundImage: `url(${IMAGES.heroBg})` }}>
+    <section className="hero" style={{ backgroundImage: bg(IMAGES.heroBg) }}>
       <div className="hero__overlay" />
       <div className="container hero__inner">
         <div className="hero__copy">
@@ -60,7 +60,7 @@ export function Hero({ onQuote }) {
         <div className="hero__photo-wrap">
           <span className="pill">{hero.photoPill}</span>
           <figure className="photo-card photo-card--tilt-left">
-            <Photo src={IMAGES.heroPhoto} alt="Finished Hex bathroom remodel in Carmichael, CA" className="photo-card__img hero__photo" />
+            <Photo eager src={IMAGES.heroPhoto} alt="Finished Hex bathroom remodel in Carmichael, CA" className="photo-card__img hero__photo" />
             <figcaption>{hero.photoCaption}</figcaption>
           </figure>
         </div>
@@ -437,7 +437,7 @@ export function Faq({ onQuote }) {
 /* ---------- Final CTA ---------- */
 export function FinalCta({ onQuote }) {
   return (
-    <section className="final-cta" style={{ backgroundImage: `url(${IMAGES.finalBg})` }}>
+    <section className="final-cta" style={{ backgroundImage: bg(IMAGES.finalBg) }}>
       <div className="final-cta__overlay" />
       <div className="container final-cta__inner">
         <Title text={finalCta.title} accent={finalCta.accent} />
@@ -459,7 +459,7 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="container site-footer__inner">
-        <img className="site-footer__logo" src={IMAGES.logo} alt="HEX General Contractors" />
+        <Photo src={IMAGES.logo} alt="HEX General Contractors" className="site-footer__logo" />
         <div className="site-footer__info">
           <span>Contractor {LICENSE.replace('CA ', '')}</span>
           <a href={PHONE_TEL}><strong>{PHONE_DISPLAY}</strong></a>
