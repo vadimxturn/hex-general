@@ -12,9 +12,27 @@ export function leadPayload(lead) {
   const first = text(lead.first_name || lead.firstName);
   const last = text(lead.last_name || lead.lastName);
   const phone = text(lead.phone).replace(/\D/g, '');
-  const utm = {};
-  Object.entries(lead).forEach(([key, value]) => {
-    if (key.startsWith('utm_') && value != null && value !== '') utm[key] = value;
+  const trackedKeys = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+    'utm_id',
+    'gclid',
+    'gbraid',
+    'wbraid',
+    'fbclid',
+    'msclkid',
+    'ttclid',
+    'fbp',
+    'fbc',
+    'landing_page',
+    'referrer',
+  ];
+  const tracked = {};
+  trackedKeys.forEach((key) => {
+    tracked[key] = text(lead[key]);
   });
 
   return {
@@ -31,7 +49,7 @@ export function leadPayload(lead) {
     source: text(lead.source),
     page: text(lead.page),
     submitted_at: text(lead.submitted_at || lead.submittedAt),
-    ...utm,
+    ...tracked,
   };
 }
 

@@ -21,7 +21,10 @@ The quote popup POSTs to `/api/lead`, which forwards the lead to `LEAD_WEBHOOK_U
 when that variable is set, and otherwise to the GoHighLevel webhook in `api/lead.js`.
 
 Payload includes the form fields plus `first_name`, `last_name`, `full_name`, `phone` (digits),
-`phone_e164`, `postal_code`, `project_type`, and `submitted_at`, along with any `utm_*` fields.
+`phone_e164`, `postal_code`, `project_type`, and `submitted_at`. These tracking keys are always
+present (empty string when unknown): `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`,
+`utm_content`, `utm_id`, `gclid`, `gbraid`, `wbraid`, `fbclid`, `msclkid`, `ttclid`, `fbp`, `fbc`,
+`landing_page`, and `referrer`.
 
 Tracking: a `lead_submit` event is pushed to `window.dataLayer`, and `fbq('track','Lead')`
 fires if the Meta Pixel is on the page.

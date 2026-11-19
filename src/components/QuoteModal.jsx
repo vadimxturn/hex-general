@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Icon from './Icon.jsx';
 import { quiz, PHONE_DISPLAY, PHONE_TEL, PRIVACY_URL, TERMS_URL } from '../content.js';
+import { CLICK_KEYS, getAttribution } from '../lib/attribution.js';
 
 const TOTAL = 5;
 
 function getUtm() {
   try {
     const p = new URLSearchParams(window.location.search);
-    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
-    return Object.fromEntries(keys.filter((k) => p.get(k)).map((k) => [k, p.get(k)]));
+    return Object.fromEntries(CLICK_KEYS.filter((k) => p.get(k)).map((k) => [k, p.get(k)]));
   } catch {
     return {};
   }
@@ -112,6 +112,7 @@ export default function QuoteModal({ open, onClose }) {
       source: 'Bathroom landing page',
       page: window.location.href,
       submittedAt: new Date().toISOString(),
+      ...getAttribution(),
       ...getUtm(),
     };
     try {
