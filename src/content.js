@@ -140,6 +140,14 @@ export const beforeAfter = {
     },
     {
       label: 'Pair 2',
+      sub: 'Full bath',
+      before: img('ba3-before.webp'),
+      after: img('ba3-after.webp'),
+      beforeAlt: 'Before: dated tan tile bathroom with a drop-in tub, wood vanity and glass shower',
+      afterAlt: 'After: remodeled bathroom with a navy tile shower, freestanding tub and light wood vanities',
+    },
+    {
+      label: 'Pair 3',
       sub: 'Window view',
       before: img('ba1-before.jpg'),
       after: img('ba2-after.jpg'),

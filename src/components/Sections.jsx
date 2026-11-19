@@ -137,9 +137,24 @@ export function Reviews({ onQuote }) {
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(3);
 
+  const phoneCarousel = () => window.matchMedia('(max-width: 768px)').matches;
+
+  const cardLeft = (el, card) => card.getBoundingClientRect().left - el.getBoundingClientRect().left + el.scrollLeft;
+
   const measure = () => {
     const el = trackRef.current;
     if (!el) return;
+    if (phoneCarousel()) {
+      const cards = [...el.querySelectorAll('.review-card')];
+      setPages(Math.max(1, cards.length));
+      const left = el.scrollLeft;
+      let active = 0;
+      cards.forEach((card, i) => {
+        if (cardLeft(el, card) <= left + 24) active = i;
+      });
+      setPage(Math.min(cards.length - 1, active));
+      return;
+    }
     const total = Math.max(1, Math.round(el.scrollWidth / el.clientWidth));
     setPages(total);
     setPage(Math.min(total - 1, Math.round(el.scrollLeft / el.clientWidth)));
@@ -153,11 +168,24 @@ export function Reviews({ onQuote }) {
 
   const go = (dir) => {
     const el = trackRef.current;
-    if (el) el.scrollBy({ left: dir * el.clientWidth, behavior: 'smooth' });
+    if (!el) return;
+    if (phoneCarousel()) {
+      const cards = [...el.querySelectorAll('.review-card')];
+      const next = Math.min(cards.length - 1, Math.max(0, page + dir));
+      if (cards[next]) el.scrollTo({ left: cardLeft(el, cards[next]), behavior: 'smooth' });
+      return;
+    }
+    el.scrollBy({ left: dir * el.clientWidth, behavior: 'smooth' });
   };
   const goTo = (i) => {
     const el = trackRef.current;
-    if (el) el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' });
+    if (!el) return;
+    if (phoneCarousel()) {
+      const card = el.querySelectorAll('.review-card')[i];
+      if (card) el.scrollTo({ left: cardLeft(el, card), behavior: 'smooth' });
+      return;
+    }
+    el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' });
   };
 
   return (
@@ -165,8 +193,8 @@ export function Reviews({ onQuote }) {
       <div className="container">
         <SectionHeader eyebrow={reviews.eyebrow} text={reviews.title} accent={reviews.accent} intro={reviews.intro} />
         <div className="review-track" ref={trackRef} onScroll={measure}>
-          {reviews.items.map((r, i) => (
-            <article className="review-card" data-reveal="" style={{ '--d': `${(i % 3) * 70}ms` }} key={r.name}>
+          {reviews.items.map((r) => (
+            <article className="review-card" key={r.name}>
               <div className="review-card__top">
                 <Stars size={22} />
                 <span className="google-mark"><GoogleG size={20} /> Google</span>
@@ -294,9 +322,9 @@ function CompareSlider({ before, after, beforeAlt, afterAlt }) {
   const [pos, setPos] = useState(50);
   return (
     <div className="compare">
-      <Photo src={after} alt={afterAlt} className="compare__img" />
+      <Photo eager src={after} alt={afterAlt} className="compare__img" />
       <div className="compare__before" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-        <Photo src={before} alt={beforeAlt} className="compare__img" />
+        <Photo eager src={before} alt={beforeAlt} className="compare__img" />
       </div>
       <span className="compare__tag compare__tag--before">Before</span>
       <span className="compare__tag compare__tag--after">After</span>
@@ -323,12 +351,10 @@ export function BeforeAfter({ onQuote }) {
     <section className="section section--gray">
       <div className="container">
         <SectionHeader eyebrow={beforeAfter.eyebrow} text={beforeAfter.title} accent={beforeAfter.accent} />
-        <div data-reveal="">
-          <CompareSlider key={active} before={pair.before} after={pair.after} beforeAlt={pair.beforeAlt} afterAlt={pair.afterAlt} />
-        </div>
+        <CompareSlider key={active} before={pair.before} after={pair.after} beforeAlt={pair.beforeAlt} afterAlt={pair.afterAlt} />
         <div className="pair-thumbs">
           {beforeAfter.pairs.map((p, i) => (
-            <button type="button" key={p.label} className={`pair-thumb${i === active ? ' pair-thumb--active' : ''}`} data-reveal="" style={{ '--d': `${80 + i * 70}ms` }} onClick={() => setActive(i)}>
+            <button type="button" key={p.label} className={`pair-thumb${i === active ? ' pair-thumb--active' : ''}`} onClick={() => setActive(i)}>
               <Photo src={p.after} alt="" className="pair-thumb__img" />
               <span><strong>{p.label}</strong><small>{p.sub}</small></span>
             </button>
@@ -424,11 +450,22 @@ export function Faq({ onQuote }) {
             const isOpen = open === i;
             return (
               <div className={`faq__item${isOpen ? ' faq__item--open' : ''}`} data-reveal="" style={{ '--d': `${i * 60}ms` }} key={it.q}>
-                <button type="button" className="faq__q" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? -1 : i)}>
+                <button
+                  type="button"
+                  className="faq__q"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${i}`}
+                  id={`faq-button-${i}`}
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                >
                   {it.q}
                   <Icon name={isOpen ? 'minus' : 'plus'} size={20} stroke={2.5} />
                 </button>
-                {isOpen && <p className="faq__a">{it.a}</p>}
+                <div className="faq__panel" id={`faq-panel-${i}`} role="region" aria-labelledby={`faq-button-${i}`} aria-hidden={!isOpen}>
+                  <div className="faq__panel-inner">
+                    <p className="faq__a">{it.a}</p>
+                  </div>
+                </div>
               </div>
             );
           })}
