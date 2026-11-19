@@ -26,7 +26,7 @@ const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)')
 
 export default function QuoteModal({ open, onClose }) {
   const [step, setStep] = useState(1);
-  const [data, setData] = useState({ projectType: '', timeline: '', zip: '', name: '', phone: '', email: '' });
+  const [data, setData] = useState({ projectType: '', timeline: '', zip: '', firstName: '', lastName: '', phone: '', email: '' });
   const [error, setError] = useState('');
   const [sending, setSending] = useState(false);
   const [present, setPresent] = useState(false);
@@ -70,7 +70,7 @@ export default function QuoteModal({ open, onClose }) {
       setError('');
       if (step === 6) {
         setStep(1);
-        setData({ projectType: '', timeline: '', zip: '', name: '', phone: '', email: '' });
+        setData({ projectType: '', timeline: '', zip: '', firstName: '', lastName: '', phone: '', email: '' });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -91,7 +91,8 @@ export default function QuoteModal({ open, onClose }) {
   };
   const submitName = (e) => {
     e.preventDefault();
-    if (data.name.trim().length < 2) return setError('Please enter your name.');
+    if (data.firstName.trim().length < 2) return setError('Please enter your first name.');
+    if (data.lastName.trim().length < 2) return setError('Please enter your last name.');
     next();
   };
   const submitContact = async (e) => {
@@ -99,7 +100,20 @@ export default function QuoteModal({ open, onClose }) {
     if (data.phone.replace(/\D/g, '').length !== 10) return setError('Please enter a 10-digit phone number.');
     if (data.email && !/^\S+@\S+\.\S+$/.test(data.email)) return setError('Please check your email address.');
     setSending(true);
-    const payload = { ...data, source: 'Bathroom landing page', page: window.location.href, submittedAt: new Date().toISOString(), ...getUtm() };
+    const firstName = data.firstName.trim();
+    const lastName = data.lastName.trim();
+    const payload = {
+      ...data,
+      firstName,
+      lastName,
+      first_name: firstName,
+      last_name: lastName,
+      name: `${firstName} ${lastName}`,
+      source: 'Bathroom landing page',
+      page: window.location.href,
+      submittedAt: new Date().toISOString(),
+      ...getUtm(),
+    };
     try {
       await fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     } catch {
@@ -111,7 +125,7 @@ export default function QuoteModal({ open, onClose }) {
       if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
     } catch { /* ignore */ }
     try {
-      sessionStorage.setItem('hexLead', JSON.stringify({ name: data.name, projectType: data.projectType, timeline: data.timeline }));
+      sessionStorage.setItem('hexLead', JSON.stringify({ firstName: data.firstName.trim(), name: `${data.firstName.trim()} ${data.lastName.trim()}`, projectType: data.projectType, timeline: data.timeline }));
       window.location.assign('/thank-you');
       return;
     } catch {
@@ -183,10 +197,16 @@ export default function QuoteModal({ open, onClose }) {
           <form onSubmit={submitName} noValidate>
             <h2 id="quote-title" className="modal__title">What is your name?</h2>
             <p className="modal__sub">So we know who we are talking to.</p>
-            <label className="field">
-              <span>Full name <em>(required)</em></span>
-              <input autoFocus autoComplete="name" placeholder="First and last name" value={data.name} onChange={(e) => set('name', e.target.value)} />
-            </label>
+            <div className="name-row">
+              <label className="field">
+                <span>First name <em>(required)</em></span>
+                <input autoFocus autoComplete="given-name" placeholder="First name" value={data.firstName} onChange={(e) => set('firstName', e.target.value)} />
+              </label>
+              <label className="field">
+                <span>Last name <em>(required)</em></span>
+                <input autoComplete="family-name" placeholder="Last name" value={data.lastName} onChange={(e) => set('lastName', e.target.value)} />
+              </label>
+            </div>
             {error && <p className="field-error">{error}</p>}
             <button type="submit" className="btn-cta btn-cta--full">Continue<Icon name="arrowRight" size={20} stroke={2.5} /></button>
           </form>

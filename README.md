@@ -18,13 +18,10 @@ React (Vite) landing page for HEX General Contractors bathroom remodeling ads, b
 ## Leads
 
 The quote popup POSTs to `/api/lead`, which forwards the lead to `LEAD_WEBHOOK_URL`
-(for example a GoHighLevel inbound webhook). Set it in Vercel:
-Project → Settings → Environment Variables → `LEAD_WEBHOOK_URL`.
+when that variable is set, and otherwise to the GoHighLevel webhook in `api/lead.js`.
 
-If the variable is not set, leads are only written to the Vercel function logs.
-
-Payload: `projectType, timeline, zip, name, phone, email, source, page, submittedAt` plus any
-`utm_*`, `gclid`, `fbclid` from the URL.
+Payload includes the form fields plus `first_name`, `last_name`, `full_name`, `phone` (digits),
+`phone_e164`, `postal_code`, `project_type`, and `submitted_at`, along with any `utm_*` fields.
 
 Tracking: a `lead_submit` event is pushed to `window.dataLayer`, and `fbq('track','Lead')`
 fires if the Meta Pixel is on the page.

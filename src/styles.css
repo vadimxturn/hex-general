@@ -526,6 +526,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .option__radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #b8c7d6; flex: none; }
 .option--active .option__radio { border: 6px solid var(--navy); }
 .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
 .field span { font-weight: 700; font-size: 15px; }
 .field em { font-style: normal; font-weight: 400; color: var(--text); }
 .field input {
@@ -660,6 +661,7 @@ ul { list-style: none; margin: 0; padding: 0; }
     color: #fff; font-weight: 700; font-size: 17px;
   }
 
+  .name-row { grid-template-columns: 1fr; }
   .modal { padding: 0; align-items: flex-end; }
   .modal__card { max-height: 100vh; height: 100%; border-radius: 0; padding: 20px 20px 28px; }
   .modal__title { font-size: 24px; }
