@@ -8,39 +8,25 @@ export const TERMS_URL = 'https://www.hexrenewal.com/terms-of-service';
 
 const img = (name) => `/images/${name}`;
 
-// Public photos already on hexrenewal.com. Used automatically when the matching
-// local file in /public/images is missing (see Photo in components/ui.jsx).
-const SQ = 'https://images.squarespace-cdn.com/content/v1/662140f0ef4578539dff3e73/';
-const sq = (path) => `${SQ}${path}?format=1500w`;
-export const FALLBACKS = {
-  [img('logo.png')]: `${SQ}23ffb430-42b7-475c-bcd0-e2d148b5f5b3/Hex-Affordable-General-Contractors-Sacramento-CA.png?format=500w`,
-  [img('hero-bg.jpg')]: sq('0818d1a2-1bb0-4a17-b53d-73f9d1d11ac0/white-marble-shower-bathroom-remodel-hex-sacramento.jpg'),
-  [img('final-cta-bg.jpg')]: sq('8694b58b-a0b9-40c5-87cc-0a585e6c91db/hex-bathroom-remodel-black-roseville-ca.jpg'),
-  [img('service-tub-to-shower.jpg')]: sq('0f9cf7bc-b519-4581-a857-0671f4b3028c/custom-bathroom-hex-general-contractor-sacramento-ca.jpg'),
-  [img('service-walk-in.jpg')]: sq('972e4f91-338b-4358-a423-c321f34e5170/hex-custom-bathroom-remodel-elk-grove-ca.jpg'),
-  [img('service-full.jpg')]: sq('a97b8a0d-07b0-4404-9312-a5ba14a3d5a1/hex-modern-bathroom-remodel-sacramento-ca.jpg'),
-  [img('service-vanity.jpg')]: sq('9291cdf7-73cb-45e1-948c-225e2b6fb935/bathroom-remodeler-hex-contractor-roseville-ca.jpg'),
-  [img('service-tile.jpg')]: sq('f75f64c4-e656-46b5-b61f-a9d64c1d906f/bathroom-remodeler-hex-contractor-folsom-ca.jpg'),
-  [img('why-hex.jpg')]: sq('ab066f9e-150d-4f04-a563-4fff1b059a3b/bathroom-remodel-hex-contractor-fair-oaks-ca.jpg'),
-  [img('gallery-1.jpg')]: sq('4c22fdbe-35ab-4d8d-9c2f-3a1ba4139eaf/hex-general-contractor-bathroom-folsom-ca.jpg'),
-  [img('gallery-2.jpg')]: sq('3bb8a359-198f-4424-b6c8-62d53bbef95e/hex-bathroom-general-contractor-sacramento-ca.jpg'),
-  [img('gallery-3.jpg')]: sq('52818d24-1444-465e-ad8c-c0a78cc5e395/hex-bathroom-general-contractor-roseville-ca.jpg'),
-  [img('gallery-4.jpg')]: sq('88df1ff0-1e09-48b8-8a3a-d040e49246d1/hex-bathroom-general-contractor-elk-grove-ca.jpg'),
-  [img('gallery-5.jpg')]: sq('c5f82bdd-77f3-4827-8dd4-4f1845189ffd/hex-bathroom-general-contractor-davis-ca.jpg'),
-  [img('gallery-6.jpg')]: sq('a28e2ae8-f0c2-4ec9-b69b-d4931925c8bb/hex-bathroom-general-contractor-fair-oaks-ca.jpg'),
-};
-export const bg = (path) => (FALLBACKS[path] ? `url(${path}), url(${FALLBACKS[path]})` : `url(${path})`);
+export const bg = (path) => `url(${path})`;
 
 export const IMAGES = {
   logo: img('logo.png'),
+  logoAlt: 'HEX General Contractors logo',
   heroBg: img('hero-bg.jpg'),
   heroPhoto: img('hero-photo.jpg'),
+  heroPhotoAlt: 'Finished corner shower with white subway tile, glass door, patterned floor tile and a white vanity with brown countertop',
   finalBg: img('final-cta-bg.jpg'),
-  howItWorks: img('service-walk-in.jpg'),
+  howItWorks: img('how-it-works.jpg'),
+  howItWorksAlt: 'Marble-look shower with glass enclosure and black hardware',
   whyHex: img('why-hex.jpg'),
+  whyHexAlt: 'Hex crew member in a white HEX shirt working inside a bathroom, seen from behind',
   crewTeam: img('crew-team.jpg'),
+  crewTeamAlt: 'Four Hex crew members standing together in front of a garage',
   crewShirt: img('crew-hexshirt.jpg'),
+  crewShirtAlt: 'Two Hex crew members in HEX shirts talking on a job site',
   crewDream: img('crew-dreamhome.jpg'),
+  crewDreamAlt: 'Hex crew member in a white shirt printed with "your dream home" on the back',
 };
 
 export const hero = {
@@ -73,12 +59,12 @@ export const problems = {
   accent: 'you are not alone',
   intro: 'These are real “before” photos from Hex bathroom projects. Here is how we fix each one.',
   tiles: [
-    { title: 'Stuck in another decade', sub: 'Pink tile, old wallpaper and fixtures you stopped noticing years ago.', fix: 'Modern tile, fixtures and lighting', img: img('problem-decade.jpg') },
-    { title: 'A big tub you never use', sub: 'It takes up half the room and mostly collects dust.', fix: 'Tub-to-shower conversion', img: img('problem-tub.jpg') },
-    { title: 'Grout, mold or a leaky shower', sub: 'You scrub, it comes right back, and you wonder what is behind the tile.', fix: 'New tile shower, hidden damage fixed first', img: img('problem-grout.jpg') },
-    { title: 'No room at the vanity', sub: 'One small sink, nowhere to set things down, always cluttered.', fix: 'A bigger vanity with real storage', img: img('problem-vanity.jpg') },
-    { title: 'Worried a contractor will vanish', sub: '“These guys were here every day from the start of our project to the end.” Charlotte N., Google review', fix: 'One project manager, start to finish', img: null },
-    { title: 'Cramped, dark and closed in', sub: 'Tight corners and poor light make a small room feel even smaller.', fix: 'Smarter layout and better lighting', img: img('problem-cramped.jpg') },
+    { title: 'Stuck in another decade', sub: 'Pink tile, old wallpaper and fixtures you stopped noticing years ago.', fix: 'Modern tile, fixtures and lighting', img: img('problem-decade.jpg'), alt: 'Dated bathroom before remodel with pink tile walls, tub and clutter' },
+    { title: 'A big tub you never use', sub: 'It takes up half the room and mostly collects dust.', fix: 'Tub-to-shower conversion', img: img('problem-tub.jpg'), alt: 'Large old bathtub with tile surround, before remodel' },
+    { title: 'Grout, mold or a leaky shower', sub: 'You scrub, it comes right back, and you wonder what is behind the tile.', fix: 'New tile shower, hidden damage fixed first', img: img('problem-grout.jpg'), alt: 'Old tiled shower with glass door and worn grout, before remodel' },
+    { title: 'No room at the vanity', sub: 'One small sink, nowhere to set things down, always cluttered.', fix: 'A bigger vanity with real storage', img: img('problem-vanity.jpg'), alt: 'Outdated pink vanity and sink, before remodel' },
+    { title: 'Worried a contractor will vanish', sub: '“These guys were here every day from the start of our project to the end.” Charlotte N., Google review', fix: 'One project manager, start to finish', img: null, alt: '' },
+    { title: 'Cramped, dark and closed in', sub: 'Tight corners and poor light make a small room feel even smaller.', fix: 'Smarter layout and better lighting', img: img('problem-cramped.jpg'), alt: 'Small dated bathroom with toilet and plain walls, before remodel' },
   ],
   closingTitle: 'Hex fixes all of this with one local team.',
   closingSub: 'Licensed and insured, one dedicated project manager, and a free consultation and estimate to start.',
@@ -114,11 +100,11 @@ export const services = {
   accent: 'whole bathroom',
   intro: 'From a simple tub-to-shower swap to a full remodel, we handle design and construction from start to finish.',
   items: [
-    { title: 'Tub-to-shower conversions', text: 'Swap a tub you never use for an easy step-in shower.', img: img('service-tub-to-shower.jpg') },
-    { title: 'Walk-in showers', text: 'Custom tile, glass, and built-in niches made for daily use.', img: img('service-walk-in.jpg') },
-    { title: 'Full bathroom remodels', text: 'Layout, plumbing, tile, lighting, and finishes handled by one team.', img: img('service-full.jpg') },
-    { title: 'Vanities and storage', text: 'More counter space and storage that fits your room.', img: img('service-vanity.jpg') },
-    { title: 'Tile and flooring', text: 'Durable tile floors and walls that are easy to keep clean.', img: img('service-tile.jpg') },
+    { title: 'Tub-to-shower conversions', text: 'Swap a tub you never use for an easy step-in shower.', img: img('service-tub-to-shower.jpg'), alt: 'Marble-look walk-in shower with black fixtures and window' },
+    { title: 'Walk-in showers', text: 'Custom tile, glass, and built-in niches made for daily use.', img: img('service-walk-in.jpg'), alt: 'Marble-look shower with glass enclosure and black hardware' },
+    { title: 'Full bathroom remodels', text: 'Layout, plumbing, tile, lighting, and finishes handled by one team.', img: img('service-full.jpg'), alt: 'Bathroom with white shaker vanity, brown countertop, shower and toilet' },
+    { title: 'Vanities and storage', text: 'More counter space and storage that fits your room.', img: img('service-vanity.jpg'), alt: 'Black double vanity with white countertop and large framed mirrors' },
+    { title: 'Tile and flooring', text: 'Durable tile floors and walls that are easy to keep clean.', img: img('service-tile.jpg'), alt: 'Glass-enclosed subway shower beside a white vanity with gold handles and a window' },
   ],
   notSureTitle: 'Not sure what you need?',
   notSureText: 'Tell us about your bathroom and we will help you pick the right option.',
@@ -144,12 +130,33 @@ export const beforeAfter = {
   title: 'See the difference in a ',
   accent: 'real Hex bathroom',
   pairs: [
-    { label: 'Pair 1', sub: 'Wide view', before: img('ba1-before.jpg'), after: img('ba1-after.jpg') },
-    { label: 'Pair 2', sub: 'Window view', before: img('ba2-before.jpg'), after: img('ba2-after.jpg') },
+    {
+      label: 'Pair 1',
+      sub: 'Wide view',
+      before: img('ba1-before.jpg'),
+      after: img('ba1-after.jpg'),
+      beforeAlt: 'Before: dated pink bathroom with corner shower',
+      afterAlt: 'After: remodeled bathroom with dark green tile shower',
+    },
+    {
+      label: 'Pair 2',
+      sub: 'Window view',
+      before: img('ba1-before.jpg'),
+      after: img('ba2-after.jpg'),
+      beforeAlt: 'Before: dated pink bathroom with corner shower',
+      afterAlt: 'After: remodeled bathroom with dark green tile shower, alternate angle',
+    },
   ],
   caption: 'Two angles of the same Hex bathroom. Dated pink tile and a cramped corner shower became a bright glass shower with deep green tile. Drag the handle to compare.',
   galleryTitle: 'More bathrooms we have finished',
-  gallery: [1, 2, 3, 4, 5, 6].map((n) => img(`gallery-${n}.jpg`)),
+  gallery: [
+    { src: img('gallery-1.jpg'), alt: 'Glass-enclosed subway-tile shower next to a toilet, with wood flooring in the doorway' },
+    { src: img('gallery-2.jpg'), alt: 'Vanity with undermount sink and brown countertop' },
+    { src: img('gallery-3.jpg'), alt: 'Long white vanity in a bright bathroom with wood-look floor' },
+    { src: img('gallery-4.jpg'), alt: 'Walk-in tub beside a glass shower in a bright bathroom with a window' },
+    { src: img('gallery-5.jpg'), alt: 'Walk-in tub next to a glass-enclosed tile shower with a window above the tub' },
+    { src: img('gallery-6.jpg'), alt: 'Close-up of a bathroom vanity with a brown countertop and undermount sink' },
+  ],
   sub: 'We call you to set up a free consultation. No pressure, no sales pitch.',
 };
 
@@ -219,7 +226,11 @@ export const thankYou = {
     { name: 'Joshua M.', text: 'Essentially they did what they said they would do every day and the results were fantastic!' },
   ],
   badges: ['5.0 on Google from 62 reviews', LICENSE, 'Licensed and insured', 'One dedicated project manager'],
-  gallery: [1, 2, 3].map((n) => img(`gallery-${n}.jpg`)),
+  gallery: [
+    { src: img('gallery-1.jpg'), alt: 'Glass-enclosed subway-tile shower next to a toilet, with wood flooring in the doorway' },
+    { src: img('gallery-2.jpg'), alt: 'Vanity with undermount sink and brown countertop' },
+    { src: img('gallery-3.jpg'), alt: 'Long white vanity in a bright bathroom with wood-look floor' },
+  ],
 };
 
 export const quiz = {

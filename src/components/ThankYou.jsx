@@ -34,7 +34,7 @@ export default function ThankYou() {
     <>
       <header className="site-header">
         <div className="container site-header__inner">
-          <a href="/" aria-label="Back to home"><Photo eager src={IMAGES.logo} alt="HEX General Contractors" className="site-header__logo" /></a>
+          <a href="/" aria-label="Back to home"><Photo eager src={IMAGES.logo} alt={IMAGES.logoAlt} className="site-header__logo" /></a>
           <a className="header-call" href={PHONE_TEL}>
             <span className="header-call__icon"><Icon name="phone" size={18} /></span>
             <span className="header-call__text">
@@ -145,8 +145,8 @@ export default function ThankYou() {
               <Title text="Get inspired before " accent="we talk" />
             </div>
             <div className="gallery">
-              {thankYou.gallery.map((src, i) => (
-                <Photo key={src} src={src} alt={`Finished Hex bathroom ${i + 1}`} className="gallery__img" />
+              {thankYou.gallery.map((photo) => (
+                <Photo key={photo.src} src={photo.src} alt={photo.alt} className="gallery__img" />
               ))}
             </div>
             <div className="cta-block">
