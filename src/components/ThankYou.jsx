@@ -14,7 +14,7 @@ function readLead() {
 
 export default function ThankYou() {
   const lead = useMemo(readLead, []);
-  const firstName = (lead.name || '').trim().split(/\s+/)[0];
+  const firstName = (lead.firstName || '').trim();
 
   useEffect(() => {
     document.title = 'Thank you | HEX General Contractors';
