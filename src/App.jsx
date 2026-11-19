@@ -5,8 +5,10 @@ import {
 } from './components/Sections.jsx';
 import QuoteModal from './components/QuoteModal.jsx';
 import ThankYou from './components/ThankYou.jsx';
+import { useMotion } from './useMotion.js';
 
 export default function App() {
+  useMotion();
   if (window.location.pathname.replace(/\/+$/, '') === '/thank-you') return <ThankYou />;
   return <LandingPage />;
 }

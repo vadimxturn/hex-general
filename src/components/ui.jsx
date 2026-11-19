@@ -23,9 +23,12 @@ export function CtaButton({ onClick, label = 'Get My Free Estimate', full = fals
   );
 }
 
-export function SectionHeader({ eyebrow, text, accent, end, intro, dark = false, align = 'center' }) {
+export function SectionHeader({ eyebrow, text, accent, end, intro, dark = false, align = 'center', reveal = true, delay = 0 }) {
   return (
-    <div className={`section-header section-header--${align}`}>
+    <div
+      className={`section-header section-header--${align}`}
+      {...(reveal ? { 'data-reveal': '', style: { '--d': `${delay}ms` } } : {})}
+    >
       <Eyebrow dark={dark}>{eyebrow}</Eyebrow>
       <Title text={text} accent={accent} end={end} />
       {intro && <p className="section-intro">{intro}</p>}
@@ -34,7 +37,7 @@ export function SectionHeader({ eyebrow, text, accent, end, intro, dark = false,
 }
 
 // Local photo. Above-the-fold slots pass eager; everything else lazy-loads.
-export function Photo({ src, alt = '', className = '', style, eager = false, priority = false }) {
+export function Photo({ src, alt = '', className = '', style, eager = false, priority = false, reveal = false, delay = 0 }) {
   return (
     <img
       className={`photo ${className}`}
@@ -43,7 +46,8 @@ export function Photo({ src, alt = '', className = '', style, eager = false, pri
       loading={eager ? 'eager' : 'lazy'}
       decoding={eager ? 'sync' : 'async'}
       fetchPriority={priority ? 'high' : 'auto'}
-      style={style}
+      data-reveal={reveal ? '' : undefined}
+      style={reveal ? { ...style, '--d': `${delay}ms` } : style}
     />
   );
 }

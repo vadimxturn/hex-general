@@ -34,30 +34,30 @@ export function Hero({ onQuote }) {
       <div className="hero__overlay" />
       <div className="container hero__inner">
         <div className="hero__copy">
-          <div className="hero__rating"><Stars size={20} /><span>{hero.rating}</span></div>
-          <h1 className="hero__title">
+          <div className="hero__rating hero-in" style={{ '--d': '0ms' }}><Stars size={20} /><span>{hero.rating}</span></div>
+          <h1 className="hero__title hero-in" style={{ '--d': '80ms' }}>
             {hero.titleTop}<br />
             <span className="accent">{hero.titleAccent}</span><br />
             {hero.titleBottom}
           </h1>
-          <ul className="hero__bullets">
+          <ul className="hero__bullets hero-in" style={{ '--d': '160ms' }}>
             {hero.bullets.map((b) => (
               <li key={b}><span className="check-circle"><Icon name="check" size={16} stroke={3} /></span>{b}</li>
             ))}
           </ul>
-          <div className="hero__cta-row">
+          <div className="hero__cta-row hero-in" style={{ '--d': '240ms' }}>
             <CtaButton onClick={onQuote} className="btn-cta--lg" />
             <a className="hero__call" href={PHONE_TEL}>or call {PHONE_DISPLAY}</a>
           </div>
-          <p className="hero__financing">{hero.financing}</p>
+          <p className="hero__financing hero-in" style={{ '--d': '320ms' }}>{hero.financing}</p>
           <div className="hero__divider" />
-          <ul className="hero__trust">
+          <ul className="hero__trust hero-in" style={{ '--d': '400ms' }}>
             <li><Icon name="shield" size={22} />{hero.trust[0]}</li>
             <li><Icon name="userCheck" size={22} />{hero.trust[1]}</li>
             <li><Icon name="award" size={22} />{hero.trust[2]}</li>
           </ul>
         </div>
-        <div className="hero__photo-wrap">
+        <div className="hero__photo-wrap hero-in" style={{ '--d': '180ms' }}>
           <span className="pill">{hero.photoPill}</span>
           <figure className="photo-card photo-card--tilt-left">
             <Photo eager priority src={IMAGES.heroPhoto} alt={IMAGES.heroPhotoAlt} className="photo-card__img hero__photo" />
@@ -74,8 +74,8 @@ export function TrustStrip() {
   return (
     <section className="trust-strip">
       <div className="container trust-strip__inner">
-        {trustStrip.map((t) => (
-          <div className="trust-item" key={t.title}>
+        {trustStrip.map((t, i) => (
+          <div className="trust-item" data-reveal="" style={{ '--d': `${i * 60}ms` }} key={t.title}>
             <span className="trust-item__icon"><Icon name={t.icon} size={22} /></span>
             <span>
               <strong>{t.title}</strong>
@@ -95,8 +95,8 @@ export function Problems({ onQuote }) {
       <div className="container">
         <SectionHeader dark eyebrow={problems.eyebrow} text={problems.title} accent={problems.accent} intro={problems.intro} />
         <div className="tiles swipe-row">
-          {problems.tiles.map((t) => (
-            <article className="tile" key={t.title}>
+          {problems.tiles.map((t, i) => (
+            <article className="tile" data-reveal="" style={{ '--d': `${i * 70}ms` }} key={t.title}>
               <div className="tile__media">
                 {t.img ? (
                   <>
@@ -119,7 +119,7 @@ export function Problems({ onQuote }) {
           ))}
         </div>
         <p className="swipe-hint">Swipe to see more →</p>
-        <div className="closing-band">
+        <div className="closing-band" data-reveal="" style={{ '--d': '80ms' }}>
           <div>
             <h3>{problems.closingTitle}</h3>
             <p>{problems.closingSub}</p>
@@ -165,8 +165,8 @@ export function Reviews({ onQuote }) {
       <div className="container">
         <SectionHeader eyebrow={reviews.eyebrow} text={reviews.title} accent={reviews.accent} intro={reviews.intro} />
         <div className="review-track" ref={trackRef} onScroll={measure}>
-          {reviews.items.map((r) => (
-            <article className="review-card" key={r.name}>
+          {reviews.items.map((r, i) => (
+            <article className="review-card" data-reveal="" style={{ '--d': `${(i % 3) * 70}ms` }} key={r.name}>
               <div className="review-card__top">
                 <Stars size={22} />
                 <span className="google-mark"><GoogleG size={20} /> Google</span>
@@ -193,7 +193,7 @@ export function Reviews({ onQuote }) {
             <button type="button" className="arrow arrow--solid" aria-label="Next reviews" onClick={() => go(1)} disabled={page >= pages - 1}><Icon name="chevronRight" size={22} /></button>
           </div>
         </div>
-        <div className="cta-block">
+        <div className="cta-block" data-reveal="" style={{ '--d': '80ms' }}>
           <CtaButton onClick={onQuote} />
           <p className="cta-sub">{reviews.sub}</p>
         </div>
@@ -206,7 +206,7 @@ export function Reviews({ onQuote }) {
 export function Band({ onQuote }) {
   return (
     <section className="band">
-      <div className="container band__inner">
+      <div className="container band__inner" data-reveal="">
         <div>
           <h3>{band.title}</h3>
           <p>{band.sub}</p>
@@ -224,8 +224,8 @@ export function Services({ onQuote }) {
       <div className="container">
         <SectionHeader eyebrow={services.eyebrow} text={services.title} accent={services.accent} intro={services.intro} />
         <div className="service-grid swipe-row">
-          {services.items.map((s) => (
-            <article className="service-card" key={s.title}>
+          {services.items.map((s, i) => (
+            <article className="service-card" data-reveal="" style={{ '--d': `${i * 70}ms` }} key={s.title}>
               <Photo src={s.img} alt={s.alt} className="service-card__img" />
               <div className="service-card__body">
                 <h3>{s.title}</h3>
@@ -233,7 +233,7 @@ export function Services({ onQuote }) {
               </div>
             </article>
           ))}
-          <article className="service-card service-card--cta">
+          <article className="service-card service-card--cta" data-reveal="" style={{ '--d': '350ms' }}>
             <h3>{services.notSureTitle}</h3>
             <p>{services.notSureText}</p>
             <CtaButton onClick={onQuote} />
@@ -252,6 +252,7 @@ export function HowItWorks({ onQuote }) {
       <div className="container">
         <SectionHeader dark eyebrow={howItWorks.eyebrow} text={howItWorks.title} accent={howItWorks.accent} />
         <div className="hiw">
+          <div className="hiw__photo-slot" data-reveal="" style={{ '--d': '40ms' }}>
           <figure className="photo-card photo-card--tilt-left hiw__photo">
             <div className="hiw__photo-inner">
               <Photo src={IMAGES.howItWorks} alt={IMAGES.howItWorksAlt} className="photo-card__img" />
@@ -262,9 +263,10 @@ export function HowItWorks({ onQuote }) {
               </div>
             </div>
           </figure>
+          </div>
           <div className="timeline">
             {howItWorks.steps.map((s, i) => (
-              <div className="step" key={s.title}>
+              <div className="step" data-reveal="" style={{ '--d': `${i * 80}ms` }} key={s.title}>
                 <div className="step__rail">
                   <span className="step__num">{i + 1}</span>
                   {i < howItWorks.steps.length - 1 && <span className="step__line" />}
@@ -276,7 +278,7 @@ export function HowItWorks({ onQuote }) {
                 </div>
               </div>
             ))}
-            <div className="timeline__cta">
+            <div className="timeline__cta" data-reveal="" style={{ '--d': '280ms' }}>
               <CtaButton onClick={onQuote} />
               <p className="cta-sub cta-sub--light">{howItWorks.sub}</p>
             </div>
@@ -321,23 +323,27 @@ export function BeforeAfter({ onQuote }) {
     <section className="section section--gray">
       <div className="container">
         <SectionHeader eyebrow={beforeAfter.eyebrow} text={beforeAfter.title} accent={beforeAfter.accent} />
-        <CompareSlider key={active} before={pair.before} after={pair.after} beforeAlt={pair.beforeAlt} afterAlt={pair.afterAlt} />
+        <div data-reveal="">
+          <CompareSlider key={active} before={pair.before} after={pair.after} beforeAlt={pair.beforeAlt} afterAlt={pair.afterAlt} />
+        </div>
         <div className="pair-thumbs">
           {beforeAfter.pairs.map((p, i) => (
-            <button type="button" key={p.label} className={`pair-thumb${i === active ? ' pair-thumb--active' : ''}`} onClick={() => setActive(i)}>
+            <button type="button" key={p.label} className={`pair-thumb${i === active ? ' pair-thumb--active' : ''}`} data-reveal="" style={{ '--d': `${80 + i * 70}ms` }} onClick={() => setActive(i)}>
               <Photo src={p.after} alt="" className="pair-thumb__img" />
               <span><strong>{p.label}</strong><small>{p.sub}</small></span>
             </button>
           ))}
         </div>
         <p className="ba-caption">{beforeAfter.caption}</p>
-        <h3 className="gallery-title">{beforeAfter.galleryTitle}</h3>
+        <h3 className="gallery-title" data-reveal="">{beforeAfter.galleryTitle}</h3>
         <div className="gallery">
-          {beforeAfter.gallery.map((photo) => (
-            <Photo key={photo.src} src={photo.src} alt={photo.alt} className="gallery__img" />
+          {beforeAfter.gallery.map((photo, i) => (
+            <div className="gallery__item" data-reveal="" style={{ '--d': `${(i % 3) * 70}ms` }} key={photo.src}>
+              <Photo src={photo.src} alt={photo.alt} className="gallery__img" />
+            </div>
           ))}
         </div>
-        <div className="cta-block">
+        <div className="cta-block" data-reveal="" style={{ '--d': '80ms' }}>
           <CtaButton onClick={onQuote} />
           <p className="cta-sub">{beforeAfter.sub}</p>
         </div>
@@ -351,10 +357,12 @@ export function WhyHex({ onQuote }) {
   return (
     <section className="section section--white">
       <div className="container why">
-        <figure className="photo-card photo-card--tilt-right why__photo">
-          <Photo src={IMAGES.whyHex} alt={IMAGES.whyHexAlt} className="photo-card__img" />
-        </figure>
-        <div className="why__copy">
+        <div className="why__photo-slot" data-reveal="" style={{ '--d': '40ms' }}>
+          <figure className="photo-card photo-card--tilt-right why__photo">
+            <Photo src={IMAGES.whyHex} alt={IMAGES.whyHexAlt} className="photo-card__img" />
+          </figure>
+        </div>
+        <div className="why__copy" data-reveal="" style={{ '--d': '120ms' }}>
           <Eyebrow>{whyHex.eyebrow}</Eyebrow>
           <Title text={whyHex.title} accent={whyHex.accent} end={whyHex.titleEnd} />
           <ul className="why__list">
@@ -380,7 +388,7 @@ export function Crew({ onQuote }) {
   return (
     <section className="section section--dark">
       <div className="container crew">
-        <div className="crew__copy">
+        <div className="crew__copy" data-reveal="">
           <Eyebrow dark>{crew.eyebrow}</Eyebrow>
           <Title text={crew.title} accent={crew.accent} />
           <p className="crew__text">{crew.text}</p>
@@ -395,9 +403,9 @@ export function Crew({ onQuote }) {
           </div>
         </div>
         <div className="crew__photos">
-          <Photo src={IMAGES.crewTeam} alt={IMAGES.crewTeamAlt} className="crew__big" />
-          <Photo src={IMAGES.crewShirt} alt={IMAGES.crewShirtAlt} className="crew__small" />
-          <Photo src={IMAGES.crewDream} alt={IMAGES.crewDreamAlt} className="crew__small" />
+          <Photo src={IMAGES.crewTeam} alt={IMAGES.crewTeamAlt} className="crew__big" reveal />
+          <Photo src={IMAGES.crewShirt} alt={IMAGES.crewShirtAlt} className="crew__small" reveal delay={80} />
+          <Photo src={IMAGES.crewDream} alt={IMAGES.crewDreamAlt} className="crew__small" reveal delay={150} />
         </div>
       </div>
     </section>
@@ -415,7 +423,7 @@ export function Faq({ onQuote }) {
           {faq.items.map((it, i) => {
             const isOpen = open === i;
             return (
-              <div className={`faq__item${isOpen ? ' faq__item--open' : ''}`} key={it.q}>
+              <div className={`faq__item${isOpen ? ' faq__item--open' : ''}`} data-reveal="" style={{ '--d': `${i * 60}ms` }} key={it.q}>
                 <button type="button" className="faq__q" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? -1 : i)}>
                   {it.q}
                   <Icon name={isOpen ? 'minus' : 'plus'} size={20} stroke={2.5} />
@@ -425,7 +433,7 @@ export function Faq({ onQuote }) {
             );
           })}
         </div>
-        <div className="cta-block">
+        <div className="cta-block" data-reveal="" style={{ '--d': '80ms' }}>
           <CtaButton onClick={onQuote} />
           <p className="cta-sub">{faq.sub}</p>
         </div>
@@ -439,7 +447,7 @@ export function FinalCta({ onQuote }) {
   return (
     <section className="final-cta" style={{ backgroundImage: bg(IMAGES.finalBg) }}>
       <div className="final-cta__overlay" />
-      <div className="container final-cta__inner">
+      <div className="container final-cta__inner" data-reveal="">
         <Title text={finalCta.title} accent={finalCta.accent} />
         <p className="final-cta__text">{finalCta.text}</p>
         <CtaButton onClick={onQuote} className="btn-cta--lg" />

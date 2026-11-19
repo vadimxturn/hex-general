@@ -21,14 +21,41 @@ function formatPhone(v) {
   return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
 }
 
+const MOTION_MS = 600;
+const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 export default function QuoteModal({ open, onClose }) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState({ projectType: '', timeline: '', zip: '', name: '', phone: '', email: '' });
   const [error, setError] = useState('');
   const [sending, setSending] = useState(false);
+  const [present, setPresent] = useState(false);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
-    if (!open) return undefined;
+    if (open) {
+      setPresent(true);
+      return undefined;
+    }
+    setActive(false);
+    const timer = window.setTimeout(() => setPresent(false), reduceMotion() ? 0 : MOTION_MS);
+    return () => window.clearTimeout(timer);
+  }, [open]);
+
+  useEffect(() => {
+    if (!present || !open) return undefined;
+    if (reduceMotion()) {
+      setActive(true);
+      return undefined;
+    }
+    const frame = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setActive(true));
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [present, open]);
+
+  useEffect(() => {
+    if (!present) return undefined;
     const onKey = (e) => e.key === 'Escape' && onClose();
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
@@ -36,7 +63,7 @@ export default function QuoteModal({ open, onClose }) {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [open, onClose]);
+  }, [present, onClose]);
 
   useEffect(() => {
     if (open) {
@@ -49,7 +76,7 @@ export default function QuoteModal({ open, onClose }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  if (!open) return null;
+  if (!present) return null;
 
   const set = (k, v) => setData((d) => ({ ...d, [k]: v }));
   const next = () => { setError(''); setStep((s) => s + 1); };
@@ -94,7 +121,7 @@ export default function QuoteModal({ open, onClose }) {
   };
 
   return (
-    <div className="modal" role="dialog" aria-modal="true" aria-labelledby="quote-title" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div className={`modal${active ? ' modal--open' : ''}`} role="dialog" aria-modal="true" aria-labelledby="quote-title" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       <div className="modal__card">
         <div className="modal__top">
           {step > 1 && step < 6 ? (
