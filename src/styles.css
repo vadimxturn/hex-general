@@ -963,6 +963,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 @media (max-width: 768px) {
+  .trust-item--google { display: none; }
+
   .js-motion .timeline .step[data-reveal] {
     opacity: 1;
     animation: none;

@@ -75,7 +75,7 @@ export function TrustStrip() {
     <section className="trust-strip">
       <div className="container trust-strip__inner">
         {trustStrip.map((t, i) => (
-          <div className="trust-item" data-reveal="" style={{ '--d': `${i * 60}ms` }} key={t.title}>
+          <div className={`trust-item${t.icon === 'star' ? ' trust-item--google' : ''}`} data-reveal="" style={{ '--d': `${i * 60}ms` }} key={t.title}>
             <span className="trust-item__icon"><Icon name={t.icon} size={22} /></span>
             <span>
               <strong>{t.title}</strong>
