@@ -250,24 +250,28 @@ export function Services({ onQuote }) {
   return (
     <section className="section section--white">
       <div className="container">
-        <SectionHeader eyebrow={services.eyebrow} text={services.title} accent={services.accent} intro={services.intro} />
-        <div className="service-grid swipe-row">
-          {services.items.map((s, i) => (
-            <article className="service-card" data-reveal="" style={{ '--d': `${i * 70}ms` }} key={s.title}>
-              <Photo src={s.img} alt={s.alt} className="service-card__img" />
-              <div className="service-card__body">
+        <SectionHeader reveal={false} eyebrow={services.eyebrow} text={services.title} accent={services.accent} intro={services.intro} />
+        <div className="service-mosaic">
+          {services.items.map((s) => (
+            <article className={`service-card service-card--${s.slot}`} key={s.title}>
+              <div className="service-card__media">
+                <Photo eager src={s.img} alt={s.alt} className="service-card__img" />
+              </div>
+              <div className="service-card__caption">
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
               </div>
             </article>
           ))}
-          <article className="service-card service-card--cta" data-reveal="" style={{ '--d': '350ms' }}>
+        </div>
+        <p className="service-swipe-hint">Swipe to see more →</p>
+        <div className="service-cta">
+          <div>
             <h3>{services.notSureTitle}</h3>
             <p>{services.notSureText}</p>
-            <CtaButton onClick={onQuote} />
-          </article>
+          </div>
+          <CtaButton onClick={onQuote} />
         </div>
-        <p className="swipe-hint swipe-hint--dark">Swipe to see more →</p>
       </div>
     </section>
   );
@@ -360,7 +364,6 @@ export function BeforeAfter({ onQuote }) {
             </button>
           ))}
         </div>
-        <p className="ba-caption">{beforeAfter.caption}</p>
         <h3 className="gallery-title" data-reveal="">{beforeAfter.galleryTitle}</h3>
         <div className="gallery">
           {beforeAfter.gallery.map((photo, i) => (
