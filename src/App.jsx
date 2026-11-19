@@ -4,8 +4,14 @@ import {
   BeforeAfter, WhyHex, Crew, Faq, FinalCta, Footer, MobileBar,
 } from './components/Sections.jsx';
 import QuoteModal from './components/QuoteModal.jsx';
+import ThankYou from './components/ThankYou.jsx';
 
 export default function App() {
+  if (window.location.pathname.replace(/\/+$/, '') === '/thank-you') return <ThankYou />;
+  return <LandingPage />;
+}
+
+function LandingPage() {
   const [open, setOpen] = useState(false);
   const openQuote = useCallback(() => setOpen(true), []);
   const closeQuote = useCallback(() => setOpen(false), []);

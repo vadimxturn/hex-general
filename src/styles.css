@@ -666,3 +666,82 @@ ul { list-style: none; margin: 0; padding: 0; }
   .modal__title { font-size: 24px; }
   .icon-tile { padding: 18px 8px; font-size: 15px; }
 }
+
+/* ---------- Thank-you page ---------- */
+.ty-hero { position: relative; background-size: cover; background-position: center; background-color: var(--deep); color: #fff; }
+.ty-hero__inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; padding-top: 96px; padding-bottom: 104px; }
+.ty-check {
+  width: 84px; height: 84px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 10px rgba(22, 163, 74, 0.18);
+}
+.ty-title { font-size: 60px; line-height: 1.1; font-weight: 700; }
+.ty-title .accent { color: var(--accent); }
+.ty-sub { font-size: 20px; color: var(--muted-light); max-width: 640px; }
+.ty-summary { font-size: 16px; color: var(--muted-light); background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); padding: 10px 18px; border-radius: 999px; }
+.ty-summary strong { color: #fff; }
+.ty-call { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 8px; }
+.ty-call .btn-cta { text-decoration: none; }
+.ty-call span { font-size: 15px; color: var(--muted-light); }
+
+.ty-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.ty-step {
+  display: flex; gap: 20px; align-items: flex-start;
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px 28px;
+}
+.ty-step__num {
+  flex: none; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 20px;
+}
+.ty-step--done { background: #ecfdf3; border-color: #bbefcf; }
+.ty-step--done .ty-step__num { background: var(--green); }
+.ty-step__tag {
+  display: inline-block; margin-bottom: 6px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--navy); background: #eef5fc; padding: 4px 10px; border-radius: 999px;
+}
+.ty-step--done .ty-step__tag { color: var(--green); background: #fff; }
+.ty-step h3 { font-size: 22px; margin-bottom: 4px; }
+.ty-step p { color: var(--text); font-size: 16px; }
+
+.ty-prep { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.ty-prep > div { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.ty-checklist { display: flex; flex-direction: column; gap: 14px; }
+.ty-checklist li { display: flex; gap: 16px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; }
+.ty-checklist strong { display: block; font-size: 18px; }
+.ty-checklist small { display: block; font-size: 15px; color: var(--text); margin-top: 2px; }
+
+.ty-quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.ty-quote { margin: 0; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.ty-quote blockquote { margin: 0; font-size: 19px; line-height: 1.5; font-weight: 700; }
+.ty-quote figcaption { color: var(--muted-dark); font-size: 14px; }
+.ty-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 40px; }
+.ty-badges li {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 15px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: 700; font-size: 14px;
+}
+.ty-badges svg { color: var(--accent); }
+.ty-back { display: inline-flex; align-items: center; text-decoration: none; }
+.mobile-bar--single { grid-template-columns: 1fr; }
+.mobile-bar--single .mobile-bar__quote { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .ty-hero__inner { padding-top: 56px; padding-bottom: 64px; gap: 16px; }
+  .ty-check { width: 68px; height: 68px; }
+  .ty-title { font-size: 38px; }
+  .ty-sub { font-size: 17px; }
+  .ty-call, .ty-call .btn-cta { width: 100%; }
+  .ty-step { padding: 20px; gap: 14px; }
+  .ty-step__num { width: 40px; height: 40px; font-size: 17px; }
+  .ty-step h3 { font-size: 19px; }
+  .ty-prep { grid-template-columns: 1fr; gap: 28px; }
+  .ty-quotes { grid-template-columns: 1fr; gap: 14px; }
+  .ty-quote blockquote { font-size: 17px; }
+  .ty-back { width: 100%; justify-content: center; }
+}

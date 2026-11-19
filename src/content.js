@@ -197,6 +197,31 @@ export const finalCta = {
   chips: ['Free consultation', 'No obligation', LICENSE, 'Financing available'],
 };
 
+export const thankYou = {
+  sub: 'A member of the Hex team will reach out to set up your free consultation. Keep an eye on your phone.',
+  steps: [
+    { tag: 'Done', title: 'You told us about your bathroom', text: 'We have your project details and contact info.' },
+    { tag: 'Next', title: 'We call you', text: 'A member of the Hex team calls to go over your project, answer quick questions, and find a time that works for your free consultation.' },
+    { tag: 'Free, no obligation', title: 'Free consultation', text: 'We come out, look at your space, talk through layouts and finishes, and answer your questions.' },
+    { tag: 'No surprises', title: 'Clear plan and price', text: 'You get a clear plan, with design help, and see the full price before any work starts. Financing is available through our partner GreenSky.' },
+    { tag: 'One point of contact', title: 'We build it', text: 'Your dedicated project manager keeps you updated from demo day to the final walk-through.' },
+  ],
+  prepIntro: 'You do not need anything to get started. These help us give you a more accurate plan and price.',
+  prep: [
+    { title: 'A few photos of your bathroom', text: 'The shower or tub, vanity, and floor. Phone photos are perfect.' },
+    { title: 'Ideas you like', text: 'Saved photos, Pinterest boards, or tile and fixtures you have seen.' },
+    { title: 'A rough budget and timeline', text: 'A ballpark helps us suggest the right options for you.' },
+    { title: 'Your questions', text: 'Write them down so nothing gets missed during the call.' },
+  ],
+  quotes: [
+    { name: 'Tim B.', text: 'The beauty of our new master bath has exceeded our expectations.' },
+    { name: 'Marshon T.', text: 'The new bathroom is absolutely beautiful. I very much recommend Hex for your remodel and repair jobs.' },
+    { name: 'Joshua M.', text: 'Essentially they did what they said they would do every day and the results were fantastic!' },
+  ],
+  badges: ['5.0 on Google from 62 reviews', LICENSE, 'Licensed and insured', 'One dedicated project manager'],
+  gallery: [1, 2, 3].map((n) => img(`gallery-${n}.jpg`)),
+};
+
 export const quiz = {
   projectTypes: [
     { value: 'Tub-to-shower', icon: 'bath' },
