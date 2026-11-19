@@ -27,6 +27,18 @@ export default function ThankYou() {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'thank_you_view', projectType: lead.projectType || '' });
     } catch { /* ignore */ }
+    try {
+      const raw = sessionStorage.getItem('hexLead');
+      if (raw) {
+        const stored = JSON.parse(raw);
+        if (stored && typeof stored === 'object' && !stored.leadTracked) {
+          sessionStorage.setItem('hexLead', JSON.stringify({ ...stored, leadTracked: true }));
+          if (typeof window.fbq === 'function') {
+            window.fbq('track', 'Lead', { content_name: stored.projectType || '' });
+          }
+        }
+      }
+    } catch { /* ignore */ }
     return () => robots.remove();
   }, [lead.projectType]);
 
