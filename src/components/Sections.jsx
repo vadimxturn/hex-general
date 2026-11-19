@@ -11,7 +11,7 @@ export function Header({ onQuote }) {
   return (
     <header className="site-header">
       <div className="container site-header__inner">
-        <Photo eager src={IMAGES.logo} alt="HEX General Contractors" className="site-header__logo" />
+        <Photo eager src={IMAGES.logo} alt={IMAGES.logoAlt} className="site-header__logo" />
         <div className="site-header__actions">
           <a className="header-call" href={PHONE_TEL}>
             <span className="header-call__icon"><Icon name="phone" size={18} /></span>
@@ -60,7 +60,7 @@ export function Hero({ onQuote }) {
         <div className="hero__photo-wrap">
           <span className="pill">{hero.photoPill}</span>
           <figure className="photo-card photo-card--tilt-left">
-            <Photo eager src={IMAGES.heroPhoto} alt="Finished Hex bathroom remodel in Carmichael, CA" className="photo-card__img hero__photo" />
+            <Photo eager priority src={IMAGES.heroPhoto} alt={IMAGES.heroPhotoAlt} className="photo-card__img hero__photo" />
             <figcaption>{hero.photoCaption}</figcaption>
           </figure>
         </div>
@@ -100,7 +100,7 @@ export function Problems({ onQuote }) {
               <div className="tile__media">
                 {t.img ? (
                   <>
-                    <Photo src={t.img} alt={`Real Hex before photo: ${t.title}`} />
+                    <Photo src={t.img} alt={t.alt} />
                     <span className="tile__chip">Real Hex before</span>
                   </>
                 ) : (
@@ -226,7 +226,7 @@ export function Services({ onQuote }) {
         <div className="service-grid swipe-row">
           {services.items.map((s) => (
             <article className="service-card" key={s.title}>
-              <Photo src={s.img} alt={s.title} className="service-card__img" />
+              <Photo src={s.img} alt={s.alt} className="service-card__img" />
               <div className="service-card__body">
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
@@ -254,7 +254,7 @@ export function HowItWorks({ onQuote }) {
         <div className="hiw">
           <figure className="photo-card photo-card--tilt-left hiw__photo">
             <div className="hiw__photo-inner">
-              <Photo src={IMAGES.howItWorks} alt="Real Hex walk-in shower" className="photo-card__img" />
+              <Photo src={IMAGES.howItWorks} alt={IMAGES.howItWorksAlt} className="photo-card__img" />
               <div className="quote-card">
                 <Stars size={18} />
                 <p>{howItWorks.quote}</p>
@@ -288,13 +288,13 @@ export function HowItWorks({ onQuote }) {
 }
 
 /* ---------- Before / after ---------- */
-function CompareSlider({ before, after }) {
+function CompareSlider({ before, after, beforeAlt, afterAlt }) {
   const [pos, setPos] = useState(50);
   return (
     <div className="compare">
-      <Photo src={after} alt="After: finished Hex bathroom" className="compare__img" />
+      <Photo src={after} alt={afterAlt} className="compare__img" />
       <div className="compare__before" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-        <Photo src={before} alt="Before: original bathroom" className="compare__img" />
+        <Photo src={before} alt={beforeAlt} className="compare__img" />
       </div>
       <span className="compare__tag compare__tag--before">Before</span>
       <span className="compare__tag compare__tag--after">After</span>
@@ -321,7 +321,7 @@ export function BeforeAfter({ onQuote }) {
     <section className="section section--gray">
       <div className="container">
         <SectionHeader eyebrow={beforeAfter.eyebrow} text={beforeAfter.title} accent={beforeAfter.accent} />
-        <CompareSlider key={active} before={pair.before} after={pair.after} />
+        <CompareSlider key={active} before={pair.before} after={pair.after} beforeAlt={pair.beforeAlt} afterAlt={pair.afterAlt} />
         <div className="pair-thumbs">
           {beforeAfter.pairs.map((p, i) => (
             <button type="button" key={p.label} className={`pair-thumb${i === active ? ' pair-thumb--active' : ''}`} onClick={() => setActive(i)}>
@@ -333,8 +333,8 @@ export function BeforeAfter({ onQuote }) {
         <p className="ba-caption">{beforeAfter.caption}</p>
         <h3 className="gallery-title">{beforeAfter.galleryTitle}</h3>
         <div className="gallery">
-          {beforeAfter.gallery.map((src, i) => (
-            <Photo key={src} src={src} alt={`Finished Hex bathroom ${i + 1}`} className="gallery__img" />
+          {beforeAfter.gallery.map((photo) => (
+            <Photo key={photo.src} src={photo.src} alt={photo.alt} className="gallery__img" />
           ))}
         </div>
         <div className="cta-block">
@@ -352,7 +352,7 @@ export function WhyHex({ onQuote }) {
     <section className="section section--white">
       <div className="container why">
         <figure className="photo-card photo-card--tilt-right why__photo">
-          <Photo src={IMAGES.whyHex} alt="Hex crew member on a bathroom job" className="photo-card__img" />
+          <Photo src={IMAGES.whyHex} alt={IMAGES.whyHexAlt} className="photo-card__img" />
         </figure>
         <div className="why__copy">
           <Eyebrow>{whyHex.eyebrow}</Eyebrow>
@@ -395,9 +395,9 @@ export function Crew({ onQuote }) {
           </div>
         </div>
         <div className="crew__photos">
-          <Photo src={IMAGES.crewTeam} alt="The Hex crew" className="crew__big" />
-          <Photo src={IMAGES.crewShirt} alt="Hex crew member at work" className="crew__small" />
-          <Photo src={IMAGES.crewDream} alt="Hex crew member at work" className="crew__small" />
+          <Photo src={IMAGES.crewTeam} alt={IMAGES.crewTeamAlt} className="crew__big" />
+          <Photo src={IMAGES.crewShirt} alt={IMAGES.crewShirtAlt} className="crew__small" />
+          <Photo src={IMAGES.crewDream} alt={IMAGES.crewDreamAlt} className="crew__small" />
         </div>
       </div>
     </section>
@@ -459,7 +459,7 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="container site-footer__inner">
-        <Photo src={IMAGES.logo} alt="HEX General Contractors" className="site-footer__logo" />
+        <Photo src={IMAGES.logo} alt={IMAGES.logoAlt} className="site-footer__logo" />
         <div className="site-footer__info">
           <span>Contractor {LICENSE.replace('CA ', '')}</span>
           <a href={PHONE_TEL}><strong>{PHONE_DISPLAY}</strong></a>

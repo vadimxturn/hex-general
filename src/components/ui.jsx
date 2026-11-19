@@ -1,6 +1,4 @@
-import React from 'react';
 import Icon from './Icon.jsx';
-import { FALLBACKS } from '../content.js';
 
 export function Eyebrow({ children, dark = false }) {
   return <span className={`eyebrow${dark ? ' eyebrow--dark' : ''}`}>{children}</span>;
@@ -35,20 +33,17 @@ export function SectionHeader({ eyebrow, text, accent, end, intro, dark = false,
   );
 }
 
-// Image with graceful fallback: local file -> hexrenewal.com photo -> soft gradient.
-export function Photo({ src, alt = '', className = '', style, eager = false }) {
-  const [stage, setStage] = React.useState(0);
-  const sources = [src, FALLBACKS[src]].filter(Boolean);
-  const current = sources[stage];
-  if (!current) return <div className={`photo photo--fallback ${className}`} style={style} role="img" aria-label={alt} />;
+// Local photo. Above-the-fold slots pass eager; everything else lazy-loads.
+export function Photo({ src, alt = '', className = '', style, eager = false, priority = false }) {
   return (
     <img
       className={`photo ${className}`}
-      src={current}
+      src={src}
       alt={alt}
       loading={eager ? 'eager' : 'lazy'}
+      decoding={eager ? 'sync' : 'async'}
+      fetchPriority={priority ? 'high' : 'auto'}
       style={style}
-      onError={() => setStage((s) => s + 1)}
     />
   );
 }
