@@ -24,8 +24,8 @@ function LandingPage() {
       <Header onQuote={openQuote} />
       <main>
         <Hero onQuote={openQuote} />
-        <BathroomDesigner />
         <TrustStrip />
+        <BathroomDesigner />
         <Problems onQuote={openQuote} />
         <Reviews onQuote={openQuote} />
         <Band onQuote={openQuote} />
