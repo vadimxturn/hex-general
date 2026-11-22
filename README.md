@@ -18,7 +18,9 @@ React (Vite) landing page for HEX General Contractors bathroom remodeling ads, b
 ## Leads
 
 The quote popup POSTs to `/api/lead`, which forwards the lead to `LEAD_WEBHOOK_URL`
-when that variable is set, and otherwise to the GoHighLevel webhook in `api/lead.js`.
+when that variable is set, and otherwise to the quote-form GoHighLevel webhook in `api/lead.js`.
+Bathroom Designer submissions (`source` `Bathroom Designer`) go to `DESIGNER_WEBHOOK_URL`
+when that variable is set, and otherwise to the designer GoHighLevel webhook in `api/lead.js`.
 
 Payload includes the form fields plus `first_name`, `last_name`, `full_name`, `phone` (digits),
 `phone_e164`, `postal_code`, `project_type`, and `submitted_at`. These tracking keys are always
