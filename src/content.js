@@ -45,6 +45,13 @@ export const hero = {
   photoCaption: 'A real Hex remodel',
 };
 
+export const designer = {
+  eyebrow: 'Bathroom designer',
+  title: 'Customize Your ',
+  accent: 'Bathroom',
+  intro: 'Pick your layout, finishes and fixtures and see your new bathroom take shape.',
+};
+
 export const trustStrip = [
   { icon: 'star', title: '5.0 on Google', sub: 'From 62 reviews' },
   { icon: 'shield', title: 'Licensed and insured', sub: LICENSE },

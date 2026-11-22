@@ -39,7 +39,7 @@ export function leadPayload(lead) {
     ...lead,
     first_name: first,
     last_name: last,
-    full_name: `${first} ${last}`.trim(),
+    full_name: text(lead.full_name || lead.name) || `${first} ${last}`.trim(),
     phone,
     phone_e164: phone ? `+1${phone}` : '',
     email: text(lead.email),

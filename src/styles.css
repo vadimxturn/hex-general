@@ -76,6 +76,12 @@ ul { list-style: none; margin: 0; padding: 0; }
 .section-header--center { align-items: center; text-align: center; }
 .section-header--left { align-items: flex-start; }
 .section-intro { font-size: 19px; color: var(--text); max-width: 760px; }
+
+/* Bathroom designer embed sits in the same content column as other sections. */
+.designer { overflow-x: clip; }
+.designer .container { min-width: 0; }
+.designer #bd-root { width: 100%; max-width: 100%; min-width: 0; }
+.designer #bd-root iframe { display: block; width: 100% !important; max-width: 100%; border: 0; }
 .section--dark .section-intro { color: var(--muted-light); }
 
 .btn-cta {

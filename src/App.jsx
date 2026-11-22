@@ -3,6 +3,7 @@ import {
   Header, Hero, TrustStrip, Problems, Reviews, Band, Services, HowItWorks,
   BeforeAfter, WhyHex, Crew, Faq, FinalCta, Footer, MobileBar,
 } from './components/Sections.jsx';
+import BathroomDesigner from './components/BathroomDesigner.jsx';
 import QuoteModal from './components/QuoteModal.jsx';
 import ThankYou from './components/ThankYou.jsx';
 import { useMotion } from './useMotion.js';
@@ -23,6 +24,7 @@ function LandingPage() {
       <Header onQuote={openQuote} />
       <main>
         <Hero onQuote={openQuote} />
+        <BathroomDesigner />
         <TrustStrip />
         <Problems onQuote={openQuote} />
         <Reviews onQuote={openQuote} />
