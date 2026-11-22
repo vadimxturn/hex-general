@@ -1,8 +1,18 @@
 // Vercel serverless function: receives quote-form leads and forwards them
 // to a CRM webhook (GoHighLevel inbound webhook).
-// LEAD_WEBHOOK_URL overrides the default when it is set in the environment.
+// Quote-form leads use LEAD_WEBHOOK_URL, or DEFAULT_WEBHOOK when that is unset.
+// Bathroom Designer leads (source "Bathroom Designer") use DESIGNER_WEBHOOK_URL,
+// or DEFAULT_DESIGNER_WEBHOOK when that is unset.
 
 const DEFAULT_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/1sTgLh3ok877p3MU8Rzl/webhook-trigger/30c81703-1df3-48b7-befb-252eedbf2f59';
+const DEFAULT_DESIGNER_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/1sTgLh3ok877p3MU8Rzl/webhook-trigger/91e64c89-5f0b-4abf-9053-9f2f2ed77034';
+
+export function webhookFor(payload) {
+  if (payload && payload.source === 'Bathroom Designer') {
+    return process.env.DESIGNER_WEBHOOK_URL || DEFAULT_DESIGNER_WEBHOOK;
+  }
+  return process.env.LEAD_WEBHOOK_URL || DEFAULT_WEBHOOK;
+}
 
 function text(value) {
   return String(value ?? '').trim();
@@ -70,7 +80,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, error: 'First name, last name, and a 10-digit phone are required' });
   }
 
-  const webhook = process.env.LEAD_WEBHOOK_URL || DEFAULT_WEBHOOK;
+  const webhook = webhookFor(payload);
 
   try {
     const r = await fetch(webhook, {

@@ -92,7 +92,7 @@ const mockWebhook = http.createServer(async (req, res) => {
 await new Promise((resolve) => pageServer.listen(0, '127.0.0.1', resolve));
 await new Promise((resolve) => mockWebhook.listen(0, '127.0.0.1', resolve));
 const { port } = pageServer.address();
-process.env.LEAD_WEBHOOK_URL = `http://127.0.0.1:${mockWebhook.address().port}/hook`;
+process.env.DESIGNER_WEBHOOK_URL = `http://127.0.0.1:${mockWebhook.address().port}/hook`;
 
 const browser = await puppeteer.launch({
   executablePath: CHROME,
